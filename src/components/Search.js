@@ -1,11 +1,9 @@
 import React from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
-
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-
+import useWindowSize from "./WindowSize";
 import searchwall from "../images/searchwall2.png";
 import heel from "../images/logo2.png";
 
@@ -16,34 +14,44 @@ const Shoes = () => {
   const [shoesBrand, setShoesBrand] = React.useState("");
   const [shoesSku, setShoesSku] = React.useState("");
   const [flag, setFlag] = React.useState(false);
-
   const [page, setPage] = React.useState(0);
   const [loading, setLoading] = React.useState(false);
+  const [status, setStatus] = React.useState("");
+
+  let [searchParams, setSearchParams] = useSearchParams();
+  let name = searchParams.get("name");
+  let pageNum = searchParams.get("pageNum");
+  let color = searchParams.get("color");
+  let brand = searchParams.get("brand");
+  let sku = searchParams.get("sku");
+
+  const size = useWindowSize();
+  const navigate = useNavigate();
+
+  // React.useEffect(() => {
+  //   if (flag) {
+  //     getShoes();
+  //   }
+  // }, [page, flag]);
 
   React.useEffect(() => {
-    if (flag) {
-      getShoes();
+    console.log("HIT", pageNum, name, color, brand, sku);
+    if (name || sku || brand) {
+      getShoes(name, pageNum, color, brand, sku);
     }
-  }, [page, flag]);
+  }, [pageNum, name, color, brand, sku]);
 
-  const [status, setStatus] = React.useState("");
-  // const params = useParams();
-
-  const getShoes = async (e, overRide = false) => {
-    if (e) {
-      e.preventDefault();
-    }
-
+  const getShoes = async (name, pageNum = 0, color, brand, sku) => {
     const options = {
       method: "GET",
       url: "https://the-sneaker-database.p.rapidapi.com/sneakers",
       params: {
         limit: "12",
-        page: overRide ? 0 : page,
-        name: shoesName,
-        colorway: shoesColorway,
-        sku: shoesSku,
-        brand: shoesBrand,
+        page: pageNum,
+        name: name,
+        colorway: color,
+        sku: sku,
+        brand: brand,
       },
       headers: {
         "X-RapidAPI-Key": "8145a0d66fmsh967b9729537d0f7p1aaab0jsncb9dccfb2e32",
@@ -73,20 +81,46 @@ const Shoes = () => {
     } else {
       setStatus("");
 
-      console.log(response.data.results);
+      console.log("RESPONSE?", response.data.results);
       setShoesArr(response.data.results);
 
-      setTimeout(() => {
-        window.scrollTo({
-          top: 820,
-          behavior: "smooth",
-        });
-      }, 10);
-      setLoading(false);
+      if (size.width > 428) {
+        setTimeout(() => {
+          window.scrollTo({
+            top: 820,
+            behavior: "smooth",
+          });
+        }, 10);
+      } else {
+        setTimeout(() => {
+          window.scrollTo({
+            top: 950,
+            behavior: "smooth",
+          });
+        }, 10);
+      }
     }
+    setLoading(false);
+  };
+
+  const setParams = (e) => {
+    e.preventDefault();
+
+    setSearchParams({
+      name: shoesName,
+      pageNum: page,
+      color: shoesColorway,
+      brand: shoesBrand,
+      sku: shoesSku,
+    });
   };
 
   const token = localStorage.getItem("token");
+
+  // const refreshPage = () => {
+  //   navigate("/search");
+  //   window.location.reload();
+  // };
 
   return (
     <div className="search-page">
@@ -99,15 +133,17 @@ const Shoes = () => {
         <hr className="home-line-right" />
       </div>
       <Link to="shoes-display">Bottom</Link>
-      <img className="search-wall" src={searchwall} alt="wallpaper" />
-      <form
-        onSubmit={(e) => {
-          getShoes(e, true);
-          setPage(0);
-        }}
-      >
+      {size.width <= 428 ? (
+        <img
+          className="search-wall"
+          src="https://i.pinimg.com/originals/3c/9e/e0/3c9ee03155be1f1250a5877b15a01971.png"
+          alt="wallpaper"
+        />
+      ) : (
+        <img className="search-wall" src={searchwall} alt="wallpaper" />
+      )}
+      <form onSubmit={setParams}>
         <h1>SNEAKERS</h1>
-        {/* <div> */}
         <input
           className="search-input"
           type="text"
@@ -120,9 +156,7 @@ const Shoes = () => {
         <div className="search-status">
           <p>{status}</p>
         </div>
-        {/* </div> */}
         <br />
-
         <h2>FILTERS</h2>
         <div>
           <input
@@ -142,27 +176,27 @@ const Shoes = () => {
           />
         </div>
       </form>
-
-      <div className="shoes-display">
+      <div
+        className={shoesArr.length > 0 ? "shoes-display" : "shoes-display-off"}
+      >
+        {/* <button onClick={refreshPage}>Reload</button> */}
         <div className="btn-section">
           <div className="back-btn">
             <button
-              disabled={page <= 0 || loading}
-              onClick={(e) => {
-                setFlag(true);
-                setPage(page - 1);
-              }}
+              disabled={pageNum <= 0 || loading}
+              onClick={() =>
+                setSearchParams({ name: name, pageNum: Number(pageNum) - 1 })
+              }
             >
               &#x3c;
             </button>
           </div>
-          <p>{page}</p>
+          <p>{pageNum}</p>
           <div className="next-btn">
             <button
               disabled={shoesArr.length < 12 || loading}
-              onClick={(e) => {
-                setFlag(true);
-                setPage(page + 1);
+              onClick={() => {
+                setSearchParams({ name: name, pageNum: Number(pageNum) + 1 });
               }}
             >
               &#62;

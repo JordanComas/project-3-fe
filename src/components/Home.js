@@ -2,19 +2,18 @@ import React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-
+import useWindowSize from "./WindowSize";
 import heel from "../images/logo2.png";
 import wallpaper from "../images/wallpaper.jpeg";
-
 import sneakersJSON from "../sneakers.json";
 
 const Home = () => {
   const [shoePics, setShoePics] = React.useState([]);
 
   const navigate = useNavigate();
+  const size = useWindowSize();
 
   const options = {
     method: "GET",
@@ -34,8 +33,6 @@ const Home = () => {
     //   return a.releaseDate.localeCompare(b.releaseDate);
     // });
 
-    // console.log(response.data.results);
-
     setShoePics(response.data.results);
   };
 
@@ -44,8 +41,6 @@ const Home = () => {
   }, []);
 
   const token = localStorage.getItem("token");
-
-  // console.log(shoePics[0].id);
 
   return (
     <div className="home-page">
@@ -57,7 +52,15 @@ const Home = () => {
         <h1 className="home-title">
           Stay Fresh <br /> From <br /> Heel2Toe
         </h1>
-        <img className="wallpaper-home" src={wallpaper} alt="Wallpaper" />
+        {size.width <= 428 ? (
+          <img
+            className="wallpaper-home"
+            src="https://wallpapersflix.com/wp-content/uploads/2021/08/Air-Jordan-Wallpaper.jpeg"
+            alt="Wallpaper"
+          />
+        ) : (
+          <img className="wallpaper-home" src={wallpaper} alt="Wallpaper" />
+        )}
       </div>
 
       <h1 className="new-shoes">Newest Releases</h1>

@@ -18,3 +18,14 @@ export const post = async (route, body) => {
     },
   });
 };
+
+export const deleted = async (route) => {
+  let token = localStorage.getItem("token");
+  return await axios.delete(baseUrl + route, {
+    headers: {
+      Authorization: token,
+    },
+  });
+};
+
+// export const newId = localStorage.getItem("id");

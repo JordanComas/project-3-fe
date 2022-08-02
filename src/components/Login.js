@@ -2,7 +2,6 @@ import React from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { post } from "../services/service";
-
 import loginimage from "../images/loginimage.jpeg";
 import heel from "../images/logo2.png";
 import eye from "../images/eye.png";
@@ -11,7 +10,6 @@ const Login = () => {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [status, setStatus] = React.useState("");
-
   const [passwordShown, setPasswordShown] = React.useState(false);
 
   const navigate = useNavigate();
@@ -27,9 +25,8 @@ const Login = () => {
           password: password,
         });
 
-        // console.log(response);
-
-        localStorage.setItem("token", response.data);
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("id", response.data.id);
         localStorage.setItem("username", username);
 
         setStatus(`welcome, ${username}`);
@@ -60,28 +57,24 @@ const Login = () => {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
-
         <input
           placeholder="Password"
           type={passwordShown ? "text" : "password"}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-
         <button>Log In</button>
         <p className="status">{status}</p>
         <p className="create-account">
           <Link to="/signup">Create Account</Link>
         </p>
       </form>
-
       <img
         className="eye"
         onClick={togglePassword}
         src={eye}
         alt="Show Password"
       />
-
       <div className="right-login">
         <hr className="login-line-left" />
         <img className="login-logo" src={heel} alt="Logo" />

@@ -63,6 +63,11 @@ export default function FadeMenu() {
             <Link to="/signup">Sign Up</Link>
           </MenuItem>
         )}
+        {username && (
+          <MenuItem onClick={handleClose}>
+            <Link to="/account">Account Details</Link>
+          </MenuItem>
+        )}
         <div className="dropdown-logout">
           {username && (
             <MenuItem onClick={handleClose}>

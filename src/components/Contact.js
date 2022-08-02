@@ -1,11 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-
 import heel from "../images/logo2.png";
-import contactimg from "../images/contactimg.png";
 
 const Contact = () => {
   const [firstName, setFirstName] = React.useState("");
@@ -16,7 +13,6 @@ const Contact = () => {
   return (
     <div className="contact-page">
       <Navbar />
-
       <div className="banner-text"></div>
       <div className="animation-area">
         <ul className="box-area">
@@ -32,7 +28,6 @@ const Contact = () => {
           <li></li>
         </ul>
       </div>
-
       <hr className="contact-line" />
       <Link to="/">
         <img className="logo" src={heel} alt="Logo" />
@@ -45,9 +40,9 @@ const Contact = () => {
             Having issues or need to reach out to me? Don't hesitate to send me
             a message.
           </p>
-          <img src={contactimg} alt=" " />
         </div>
         <form className="right-col">
+          <h1>Message Us</h1>
           <div className="contact-names">
             <input
               placeholder="First Name..."

@@ -1,11 +1,11 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-
 import wallpaper from "../images/404.webp";
 import heel from "../images/logo2.png";
 
 const NotFound = () => {
   const navigate = useNavigate();
+
   return (
     <div className="notfound-page">
       <div className="notfound-left">

@@ -4,25 +4,23 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { post } from "../services/service";
 import { get } from "../services/service";
+import { deleted } from "../services/service";
 import TopButton from "./TopButton";
-
 import like from "../images/like.png";
+// import { newId } from "../services/service";
 
 const ShoesDetails = () => {
   const [shoesDet, setShoesDet] = React.useState({});
   const [shoes360, setShoes360] = React.useState([]);
-
-  // const [newTitle, setNewTitle] = React.useState("");
   const [newContent, setNewContent] = React.useState("");
-
   const [comments, setComments] = React.useState([]);
-
   const [refresh, setRefresh] = React.useState(false);
-
   const [likes, setLikes] = React.useState([]);
 
   const params = useParams();
   const navigate = useNavigate();
+
+  const newId = localStorage.getItem("id");
 
   React.useEffect(() => {
     getShoesDet();
@@ -32,7 +30,6 @@ const ShoesDetails = () => {
 
   React.useEffect(() => {
     getComments();
-    createComment();
   }, [refresh]);
 
   const options = {
@@ -55,10 +52,9 @@ const ShoesDetails = () => {
 
   const createComment = async (e) => {
     e.preventDefault();
-    // console.log(newContent);
+
     try {
       const response = await post("/posts/create", {
-        // title: newTitle,
         content: newContent,
         shoeId: params._id,
       });
@@ -72,21 +68,26 @@ const ShoesDetails = () => {
   const getComments = async () => {
     const response = await get(`/posts/comments/${params._id}`);
 
-    // console.log(response.data);
     setComments(response.data);
   };
-
-  // console.log(title[0]);
 
   const likeComment = async (postId) => {
     const response = await post(`/posts/likes/${postId}`, {
       likes: likes,
     });
 
-    // console.log(response.data);
-
     setLikes(response);
     setRefresh(!refresh);
+  };
+
+  const removeComment = async (postId) => {
+    try {
+      const response = await deleted(`/posts/delete-comment/${postId}`);
+
+      setRefresh(!refresh);
+    } catch (err) {
+      console.error(err.message);
+    }
   };
 
   return (
@@ -165,12 +166,6 @@ const ShoesDetails = () => {
             </div>
             <form className="comments-section" onSubmit={createComment}>
               <h2>Comments</h2>
-              {/* <input
-                placeholder="Title"
-                type="text"
-                value={newTitle}
-                onChange={(e) => setNewTitle(e.target.value)}
-              /> */}
               <input
                 placeholder="Add a comment..."
                 type="textarea"
@@ -182,19 +177,27 @@ const ShoesDetails = () => {
             <div>
               {comments.length > 0 &&
                 comments.map((comment) => {
+                  console.log("COMMENT CREATOR", comment);
+                  console.log("USER ID", newId);
+                  console.log("SAME?", comment.creatorId._id === newId);
                   return (
-                    <div className="single-comment">
-                      <div className="comment-name">
-                        <img
-                          className="profile-pic-comment"
-                          src={
-                            comment.creatorId.profilePic ||
-                            "https://st3.depositphotos.com/6672868/13701/v/600/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"
-                          }
-                        />
-                        <h5>{comment.creatorId.first_name} &nbsp;</h5>
-                        <h5>{comment.creatorId.last_name}</h5>
-                      </div>
+                    <div className="single-comment" key={comment._id}>
+                      {comment.creatorId ? (
+                        <div className="comment-name">
+                          <img
+                            className="profile-pic-comment"
+                            src={
+                              comment.creatorId.profilePic ||
+                              "https://st3.depositphotos.com/6672868/13701/v/600/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"
+                            }
+                          />
+                          <h5>{comment.creatorId.first_name}&nbsp;</h5>
+                          <h5>{comment.creatorId.last_name}</h5>
+                        </div>
+                      ) : (
+                        <h5>Deleted Account</h5>
+                      )}
+
                       <p className="comment-content">{comment.content}</p>
                       <div className="like-section">
                         <img
@@ -205,12 +208,16 @@ const ShoesDetails = () => {
                         />
                         <p className="likes-num">{comment.likes.length}</p>
                       </div>
-
-                      {/* <h4>{comment.title}</h4> */}
-                      {/* <p>{likes.length}</p> */}
-                      {/* <button onClick={() => likeComment(comment._id)}>
-                      Like
-                    </button> */}
+                      <div className="remove-btn">
+                        {comment.creatorId._id === newId && (
+                          <button onClick={() => removeComment(comment._id)}>
+                            Remove
+                          </button>
+                        )}
+                        {/* <button onClick={() => removeComment(comment._id)}>
+                          Remove
+                        </button> */}
+                      </div>
                     </div>
                   );
                 })}
