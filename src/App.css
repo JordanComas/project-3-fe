@@ -6,6 +6,10 @@ body {
   width: 100vw;
 }
 
+input::placeholder {
+  font-style: italic;
+}
+
 nav {
   display: flex;
   flex-direction: row;
@@ -34,6 +38,7 @@ nav a {
 .login-wrapper a {
   width: 2.3vw;
   margin-right: 2vw;
+  color: #9c1536;
 }
 
 .login-wrapper img {
@@ -64,6 +69,7 @@ nav a {
   height: 7vh;
   margin-left: 1.5vw;
   margin-top: 2vh;
+  color: #9c1536;
 }
 
 .menu-wrapper img {
@@ -100,6 +106,7 @@ nav a {
 .contact-wrapper a {
   width: 2.3vw;
   margin-right: 2vw;
+  color: #9c1536;
 }
 
 .contact-wrapper img {
@@ -123,7 +130,9 @@ nav a {
 }
 
 .contact-wrapper img:hover {
-  filter: opacity(2) drop-shadow(0 0 0 #9c1536);
+  filter: opacity(0.4) drop-shadow(0 0 0 #9c1536);
+  /* filter: invert(100%) sepia(16%) saturate(7463%) hue-rotate(222deg)
+    brightness(119%) contrast(115%) drop-shadow(0 0 0 red); */
 }
 
 .search-wrapper {
@@ -135,6 +144,10 @@ nav a {
   position: absolute;
   right: 12vw;
   margin-top: 4vh;
+}
+
+.search-wrapper a {
+  color: #9c1536;
 }
 
 .back-btn {
@@ -177,7 +190,7 @@ nav a {
 
 .search-wrapper a {
   width: 2.3vw;
-  margin-right: 2vw;
+  margin-right: 1.5vw;
 }
 
 .search-wrapper img {
@@ -201,7 +214,7 @@ nav a {
 }
 
 .search-wrapper img:hover {
-  filter: opacity(2) drop-shadow(0 0 0 #9c1536);
+  filter: opacity(0.4) drop-shadow(0 0 0 #9c1536);
 }
 
 .logout-wrapper {
