@@ -20,7 +20,7 @@ const Home = () => {
     url: "https://the-sneaker-database.p.rapidapi.com/sneakers",
     params: { limit: "10" },
     headers: {
-      "X-RapidAPI-Key": "8145a0d66fmsh967b9729537d0f7p1aaab0jsncb9dccfb2e32",
+      "X-RapidAPI-Key": process.env.REACT_APP_SHOE_API,
       "X-RapidAPI-Host": "the-sneaker-database.p.rapidapi.com",
     },
   };

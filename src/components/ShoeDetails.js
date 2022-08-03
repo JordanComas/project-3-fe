@@ -33,7 +33,7 @@ const ShoesDetails = () => {
     method: "GET",
     url: `https://the-sneaker-database.p.rapidapi.com/sneakers/${params._id}`,
     headers: {
-      "X-RapidAPI-Key": "7f80d56842mshb52da311c570f6fp15a4a9jsn5f23c14c23ba",
+      "X-RapidAPI-Key": process.env.REACT_APP_SHOE_API,
       "X-RapidAPI-Host": "the-sneaker-database.p.rapidapi.com",
     },
   };
