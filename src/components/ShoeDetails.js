@@ -2,12 +2,9 @@ import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { post } from "../services/service";
-import { get } from "../services/service";
-import { deleted } from "../services/service";
+import { post, get, deleted } from "../services/service";
 import TopButton from "./TopButton";
 import like from "../images/like.png";
-// import { newId } from "../services/service";
 
 const ShoesDetails = () => {
   const [shoesDet, setShoesDet] = React.useState({});
@@ -126,7 +123,6 @@ const ShoesDetails = () => {
                 />
               )}
         </div>
-
         <div className="details-page-2">
           <div className="shoe-name">
             <h2>{shoesDet.name}</h2>
@@ -177,9 +173,9 @@ const ShoesDetails = () => {
             <div>
               {comments.length > 0 &&
                 comments.map((comment) => {
-                  console.log("COMMENT CREATOR", comment);
-                  console.log("USER ID", newId);
-                  console.log("SAME?", comment.creatorId._id === newId);
+                  // console.log("COMMENT CREATOR", comment);
+                  // console.log("USER ID", newId);
+                  // console.log("SAME?", comment.creatorId._id === newId);
                   return (
                     <div className="single-comment" key={comment._id}>
                       {comment.creatorId ? (
@@ -214,9 +210,6 @@ const ShoesDetails = () => {
                             Remove
                           </button>
                         )}
-                        {/* <button onClick={() => removeComment(comment._id)}>
-                          Remove
-                        </button> */}
                       </div>
                     </div>
                   );

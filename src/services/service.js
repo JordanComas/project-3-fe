@@ -27,5 +27,3 @@ export const deleted = async (route) => {
     },
   });
 };
-
-// export const newId = localStorage.getItem("id");

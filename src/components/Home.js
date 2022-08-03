@@ -27,8 +27,9 @@ const Home = () => {
 
   const getShoes = async () => {
     let response = await axios.request(options);
-    let allShoes = response.data.results;
 
+    //This is to sort the shoes by release date
+    // let allShoes = response.data.results;
     // allShoes.sort((a, b) => {
     //   return a.releaseDate.localeCompare(b.releaseDate);
     // });
@@ -49,9 +50,6 @@ const Home = () => {
         <hr className="home-line" />
         <img className="logo" src={heel} alt="Logo" />
         <hr className="home-line-right" />
-        <h1 className="home-title">
-          Stay Fresh <br /> From <br /> Heel2Toe
-        </h1>
         {size.width <= 428 ? (
           <img
             className="wallpaper-home"

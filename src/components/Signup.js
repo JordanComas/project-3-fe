@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { post } from "../services/service";
 import heel from "../images/logo2.png";
@@ -34,7 +33,6 @@ const Signup = () => {
         profilePic: imageUrl,
       });
 
-      // localStorage.setItem("token", response.data);
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("id", response.data.id);
       localStorage.setItem("username", username);
@@ -128,7 +126,6 @@ const Signup = () => {
           </i>
         </label>
         <input id="file-upload" type="file" onChange={handleFileUpload} />
-        {/* <input type="file" onChange={handleFileUpload} /> */}
         <button disabled={loading}>Register</button>
         <p className="signup-status">{status}</p>
       </form>

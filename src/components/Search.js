@@ -2,7 +2,6 @@ import React from "react";
 import axios from "axios";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import Navbar from "./Navbar";
-import Footer from "./Footer";
 import useWindowSize from "./WindowSize";
 import searchwall from "../images/searchwall2.png";
 import heel from "../images/logo2.png";
@@ -13,7 +12,7 @@ const Shoes = () => {
   const [shoesColorway, setShoescolorway] = React.useState("");
   const [shoesBrand, setShoesBrand] = React.useState("");
   const [shoesSku, setShoesSku] = React.useState("");
-  const [flag, setFlag] = React.useState(false);
+  // const [flag, setFlag] = React.useState(false);
   const [page, setPage] = React.useState(0);
   const [loading, setLoading] = React.useState(false);
   const [status, setStatus] = React.useState("");
@@ -35,7 +34,6 @@ const Shoes = () => {
   // }, [page, flag]);
 
   React.useEffect(() => {
-    console.log("HIT", pageNum, name, color, brand, sku);
     if (name || sku || brand) {
       getShoes(name, pageNum, color, brand, sku);
     }
@@ -68,11 +66,11 @@ const Shoes = () => {
         newObj[key] = options.params[key];
       }
     });
-    console.log("new obj", newObj);
+    // console.log("new obj", newObj);
 
     options.params = newObj;
 
-    console.log("submit", shoesBrand, shoesColorway, shoesName);
+    // console.log("submit", shoesBrand, shoesColorway, shoesName);
     let response = await axios.request(options);
 
     if (response.data.results.length <= 0) {
@@ -81,7 +79,7 @@ const Shoes = () => {
     } else {
       setStatus("");
 
-      console.log("RESPONSE?", response.data.results);
+      // console.log("RESPONSE?", response.data.results);
       setShoesArr(response.data.results);
 
       if (size.width > 428) {
@@ -116,11 +114,6 @@ const Shoes = () => {
   };
 
   const token = localStorage.getItem("token");
-
-  // const refreshPage = () => {
-  //   navigate("/search");
-  //   window.location.reload();
-  // };
 
   return (
     <div className="search-page">

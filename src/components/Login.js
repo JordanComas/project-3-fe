@@ -1,10 +1,11 @@
 import React from "react";
-import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { post } from "../services/service";
 import loginimage from "../images/loginimage.jpeg";
 import heel from "../images/logo2.png";
 import eye from "../images/eye.png";
+import useWindowSize from "./WindowSize";
+import h2t from "../images/h2t.png";
 
 const Login = () => {
   const [username, setUsername] = React.useState("");
@@ -13,6 +14,7 @@ const Login = () => {
   const [passwordShown, setPasswordShown] = React.useState(false);
 
   const navigate = useNavigate();
+  const size = useWindowSize();
 
   const existingUser = async (e) => {
     e.preventDefault();
@@ -51,6 +53,13 @@ const Login = () => {
         &#8592;
       </Link>
       <form onSubmit={existingUser}>
+        {size.width <= 428 && (
+          <div className="login-top">
+            <img src={h2t} alt=" " />
+            <h1>Welcome</h1>
+            <p>Login</p>
+          </div>
+        )}
         <input
           placeholder="Username"
           type="text"

@@ -1,9 +1,10 @@
 import React from "react";
 import { deleted, get, post } from "../services/service";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import home from "../images/home.png";
 import contact from "../images/contact.png";
 import search from "../images/search.png";
+import useWindowSize from "./WindowSize";
 
 const AccountDetails = () => {
   const [details, setDetails] = React.useState([]);
@@ -14,8 +15,8 @@ const AccountDetails = () => {
   const [email, setEmail] = React.useState("");
   const [status, setStatus] = React.useState("");
 
-  const params = useParams();
   const navigate = useNavigate();
+  const size = useWindowSize();
 
   const userDetails = async () => {
     const response = await get("/users/account-details");
@@ -52,15 +53,12 @@ const AccountDetails = () => {
 
     if (!firstName || !lastName || !email) {
       setStatus("Please don't leave empty fields.");
-      console.log(status.length);
     } else {
       const response = await post("/users/update-user", {
         first_name: firstName,
         last_name: lastName,
         email: email,
       });
-
-      console.log(response.data.first_name);
 
       setFirstName(response.data.first_name);
       setLastName(response.data.last_name);
@@ -116,6 +114,24 @@ const AccountDetails = () => {
         </button>
       </div>
       <div className="info-right">
+        {size.width <= 428 && (
+          <Link className="arrow" onClick={() => navigate(-1)} to="/">
+            &#8592;
+          </Link>
+        )}
+        {size.width <= 428 && (
+          <div className="info-top">
+            <h1>Account Details</h1>
+            <img
+              className="info-top-img"
+              src={
+                details.profilePic ||
+                "https://st3.depositphotos.com/6672868/13701/v/600/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"
+              }
+              alt="No Image available"
+            />
+          </div>
+        )}
         <form onSubmit={updateUser}>
           <h4>First Name</h4>
           <input

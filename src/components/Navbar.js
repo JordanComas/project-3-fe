@@ -22,7 +22,6 @@ const Navbar = (props) => {
         <FadeMenu />
         <p className="menu-text">Menu</p>
       </div>
-
       {size.width >= 429 && (
         <div>
           <div onClick={logout} className="logout-wrapper">

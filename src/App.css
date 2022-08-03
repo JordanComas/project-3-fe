@@ -150,7 +150,6 @@ nav a {
 
 .back-btn button:hover {
   cursor: pointer;
-  /* color: #9c1536; */
 }
 
 .next-btn {
@@ -166,7 +165,6 @@ nav a {
 
 .next-btn button:hover {
   cursor: pointer;
-  /* color: #9c1536; */
 }
 
 .btn-section {
@@ -371,7 +369,7 @@ nav a {
 }
 
 .arrow:hover {
-  filter: opacity(0.4) drop-shadow(0 0 0 blue);
+  color: #9c1536;
 }
 
 form {
@@ -1048,7 +1046,6 @@ li {
 
 .contact-footer {
   margin-top: 91vh;
-  /* position: absolute; */
   bottom: 0%;
 }
 
@@ -1103,7 +1100,6 @@ li {
   list-style: none;
   width: 25px;
   height: 25px;
-  /* background: rgba(255, 255, 255, 0.2); */
   background: #9c1536;
   animation: animate 20s linear infinite;
   bottom: -150px;
@@ -1418,12 +1414,12 @@ li {
 }
 
 /* Mobile */
-
 @media (max-width: 428px) {
   .back-to-top {
     height: 5vh;
     width: 10vw;
   }
+
   /* navbar */
   .search-wrapper {
     margin-right: 17vw;
@@ -1448,8 +1444,8 @@ li {
     margin: 0%;
     width: 37vw;
   }
-  /* Home */
 
+  /* Home */
   .wallpaper-home {
     height: 100vh;
     width: 100vw;
@@ -1506,8 +1502,21 @@ li {
     height: 25vh;
     width: 30vh;
   }
+  .comments-section input {
+    width: 70vw;
+  }
+  .comments-section button {
+    width: 30vw;
+  }
 
   /* login */
+  .login-page p {
+    text-align: center;
+    color: #9c1536;
+  }
+  .login-page h1 {
+    color: #9c1536;
+  }
   .login-image {
     display: none;
   }
@@ -1521,15 +1530,24 @@ li {
     display: none;
   }
   .login-page input {
-    width: 50vw;
+    width: 65vw;
   }
   .eye {
     width: 5vw;
-    left: 70%;
+    left: 73%;
+    top: 48%;
+  }
+  .login-top img {
+    height: 30vh;
+    position: fixed;
+    top: -2%;
+    left: 19%;
   }
   .login-page button {
     width: 30vw;
   }
+
+  /* signup */
   .right-signup {
     display: none;
   }
@@ -1544,8 +1562,8 @@ li {
     width: 35vw;
     margin: 5vh 3vw;
   }
-  .signup-email {
-    width: 10vw;
+  form > .signup-email {
+    width: 75vw;
   }
   .required {
     right: 5%;
@@ -1555,7 +1573,6 @@ li {
   }
 
   /* contact */
-
   .contact-line-right {
     width: 35vw;
   }
@@ -1598,9 +1615,17 @@ li {
   }
   .info-right {
     width: 100vw;
+    text-align: center;
+  }
+  .info-right h1 {
+    width: 100vw;
   }
   .info-right input {
-    width: 50vw;
+    width: 65vw;
+  }
+  .info-top-img {
+    height: 100px;
+    border-radius: 50%;
   }
   .save-btn {
     width: 30vw;
@@ -1617,6 +1642,36 @@ li {
   }
   .cancel-button {
     width: 20vw;
+  }
+
+  /* not found  */
+  .notfound-right {
+    display: none;
+  }
+  .notfound-left {
+    width: 100vw;
+    height: 100vh;
+  }
+  .notfound-left h1 {
+    color: #9c1536;
+  }
+  .notfound-left h4 {
+    width: 100vw;
+    height: 100vh;
+    color: black;
+    position: fixed;
+    top: 40%;
+    left: 36%;
+  }
+  .notfound-text {
+    font-size: 10vw;
+  }
+  .arrow-notfound {
+    left: 40%;
+  }
+  .notfound-page {
+    height: 100vh;
+    width: 100vw;
   }
 }
 
