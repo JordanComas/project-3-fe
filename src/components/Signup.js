@@ -4,6 +4,8 @@ import { post } from "../services/service";
 import heel from "../images/logo2.png";
 import wallpaper from "../images/wall6.jpeg";
 import upload from "../images/upload.png";
+import eye from "../images/eye.png";
+import Loader from "./Loader";
 
 const Signup = () => {
   const [username, setUsername] = React.useState("");
@@ -14,6 +16,8 @@ const Signup = () => {
   const [imageUrl, setImageUrl] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const [status, setStatus] = React.useState("");
+  const [passwordShown, setPasswordShown] = React.useState(false);
+  const [loader, setLoader] = React.useState(false);
 
   const navigate = useNavigate();
 
@@ -24,6 +28,7 @@ const Signup = () => {
     }
 
     try {
+      setLoader(true);
       const response = await post("/users/signup", {
         username: username,
         password: password,
@@ -40,11 +45,12 @@ const Signup = () => {
       setStatus("Thanks for signing up!");
 
       setTimeout(() => {
-        navigate("/login");
+        navigate("/");
       }, 2000);
     } catch (err) {
       console.error(err.message);
       setStatus("Username already exists");
+      setLoader(false);
     }
   };
 
@@ -64,9 +70,13 @@ const Signup = () => {
     }
   };
 
+  const togglePassword = () => {
+    setPasswordShown(!passwordShown);
+  };
+
   return (
     <div className="signup-page">
-      <Link className="arrow" onClick={() => navigate(-1)} to="/">
+      <Link className="arrow" to="/login">
         &#8592;
       </Link>
       <p className="required">* Required</p>
@@ -105,13 +115,20 @@ const Signup = () => {
             onChange={(e) => setUsername(e.target.value)}
             required
           />
-          <input
-            placeholder="*Password..."
-            type="text"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+          <div className="signup-eye">
+            <input
+              placeholder="*Password..."
+              type={passwordShown ? "text" : "password"}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <img
+              // className="eye"
+              onClick={togglePassword}
+              src={eye}
+              alt="Show Password"
+            />
+          </div>
         </div>
         <input
           className="signup-email"
@@ -129,6 +146,7 @@ const Signup = () => {
         <button disabled={loading}>Register</button>
         <p className="signup-status">{status}</p>
       </form>
+      {loader && <Loader />}
       <div className="right-signup">
         <hr className="login-line-left" />
         <img className="login-logo" src={heel} alt="Logo" />

@@ -47,9 +47,9 @@ const Home = () => {
     <div className="home-page">
       <Navbar token={token} />
       <div className="home-1">
-        <hr className="home-line" />
+        {/* <hr className="home-line" />
         <img className="logo" src={heel} alt="Logo" />
-        <hr className="home-line-right" />
+        <hr className="home-line-right" /> */}
         {size.width <= 428 ? (
           <img
             className="wallpaper-home"

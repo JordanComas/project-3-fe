@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import axios from "axios";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import Navbar from "./Navbar";
@@ -84,24 +84,34 @@ const Shoes = () => {
       // console.log("RESPONSE?", response.data.results);
       setShoesArr(response.data.results);
 
-      if (size.width > 428) {
-        setTimeout(() => {
-          window.scrollTo({
-            top: 820,
-            behavior: "smooth",
-          });
-        }, 10);
-      } else {
-        setTimeout(() => {
-          window.scrollTo({
-            top: 950,
-            behavior: "smooth",
-          });
-        }, 10);
-      }
+      // if (size.width > 428) {
+      //   setTimeout(() => {
+      //     window.scrollTo({
+      //       top: 820,
+      //       behavior: "smooth",
+      //     });
+      //   }, 10);
+      // } else {
+      //   setTimeout(() => {
+      //     window.scrollTo({
+      //       top: 950,
+      //       behavior: "smooth",
+      //     });
+      //   }, 10);
+      // }
+      setTimeout(() => {
+        executeScroll();
+      }, 10);
     }
     setLoading(false);
   };
+
+  const myRef = useRef(null);
+
+  const executeScroll = () =>
+    myRef.current.scrollIntoView({
+      behavior: "smooth",
+    });
 
   const setParams = (e) => {
     e.preventDefault();
@@ -115,19 +125,26 @@ const Shoes = () => {
     });
   };
 
+  //   setTimeout(() => {
+  //     myRef.current.scrollIntoView({
+  //       behavior: "smooth",
+  //     });
+  //   }, 10);
+  // };
+
   const token = localStorage.getItem("token");
 
   return (
     <div className="search-page">
       <Navbar token={token} />
-      <div className="search-1">
+      {/* <div className="search-1">
         <hr className="home-line" />
         <Link to="/">
           <img className="logo" src={heel} alt="Logo" />
         </Link>
         <hr className="home-line-right" />
-      </div>
-      <Link to="shoes-display">Bottom</Link>
+      </div> */}
+      {/* <Link to="shoes-display">Bottom</Link> */}
       {size.width <= 428 ? (
         <img
           className="search-wall"
@@ -137,6 +154,7 @@ const Shoes = () => {
       ) : (
         <img className="search-wall" src={searchwall} alt="wallpaper" />
       )}
+
       <form onSubmit={setParams}>
         <h1>SNEAKERS</h1>
         <input
@@ -171,7 +189,11 @@ const Shoes = () => {
           />
         </div>
       </form>
+      {/* <button style={{ zIndex: 1 }} onClick={executeScroll}>
+        Scroll
+      </button> */}
       <div
+        ref={myRef}
         className={shoesArr.length > 0 ? "shoes-display" : "shoes-display-off"}
       >
         {/* <button onClick={refreshPage}>Reload</button> */}

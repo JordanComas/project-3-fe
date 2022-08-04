@@ -6,12 +6,14 @@ import heel from "../images/logo2.png";
 import eye from "../images/eye.png";
 import useWindowSize from "./WindowSize";
 import h2t from "../images/h2t.png";
+import Loader from "./Loader";
 
 const Login = () => {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [status, setStatus] = React.useState("");
   const [passwordShown, setPasswordShown] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
 
   const navigate = useNavigate();
   const size = useWindowSize();
@@ -22,6 +24,7 @@ const Login = () => {
       setStatus("Please enter username and password");
     } else {
       try {
+        setLoading(true);
         const response = await post("/users/login", {
           username: username,
           password: password,
@@ -39,6 +42,7 @@ const Login = () => {
       } catch (err) {
         console.error(err.message);
         setStatus("Username or password is incorrect");
+        setLoading(false);
       }
     }
   };
@@ -49,7 +53,7 @@ const Login = () => {
 
   return (
     <div className="login-page">
-      <Link className="arrow" onClick={() => navigate(-1)} to="/">
+      <Link className="arrow" to="/">
         &#8592;
       </Link>
       <form onSubmit={existingUser}>
@@ -66,24 +70,23 @@ const Login = () => {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
-        <input
-          placeholder="Password..."
-          type={passwordShown ? "text" : "password"}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <div className="login-eye">
+          <input
+            placeholder="Password..."
+            type={passwordShown ? "text" : "password"}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <img onClick={togglePassword} src={eye} alt="Show Password" />
+        </div>
         <button>Log In</button>
         <p className="status">{status}</p>
         <p className="create-account">
           <Link to="/signup">Create Account</Link>
         </p>
       </form>
-      <img
-        className="eye"
-        onClick={togglePassword}
-        src={eye}
-        alt="Show Password"
-      />
+      {loading && <Loader />}
+      {/* <Loader /> */}
       <div className="right-login">
         <hr className="login-line-left" />
         <img className="login-logo" src={heel} alt="Logo" />

@@ -6,6 +6,7 @@ import search from "../images/search.png";
 import logpic from "../images/logpic.png";
 import FadeMenu from "./FadeMenu";
 import useWindowSize from "./WindowSize";
+import heel from "../images/logo2.png";
 
 const Navbar = (props) => {
   const navigate = useNavigate();
@@ -18,6 +19,11 @@ const Navbar = (props) => {
 
   return props.token ? (
     <nav>
+      <hr className="home-line" />
+      <Link to="/">
+        <img className="logo" src={heel} alt="Logo" />
+      </Link>
+      <hr className="home-line-right" />
       <div className="menu-wrapper">
         <FadeMenu />
         <p className="menu-text">Menu</p>
@@ -45,6 +51,11 @@ const Navbar = (props) => {
     </nav>
   ) : (
     <nav>
+      <hr className="home-line" />
+      <Link to="/">
+        <img className="logo" src={heel} alt="Logo" />
+      </Link>
+      <hr className="home-line-right" />
       <div className="menu-wrapper">
         <FadeMenu />
         <p className="menu-text">Menu</p>
