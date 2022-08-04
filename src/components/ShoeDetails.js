@@ -134,9 +134,13 @@ const ShoesDetails = () => {
               <h4>Resell Price</h4>
             </div>
             <div className="side-side">
-              <p>${shoesDet.retailPrice}</p>
-              <p>|</p>
-              <p>${shoesDet.estimatedMarketValue}</p>
+              <p>
+                ${shoesDet.retailPrice}
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$
+                {shoesDet.estimatedMarketValue}
+              </p>
+              {/* <p></p>
+              <p></p> */}
             </div>
             <p>SKU: {shoesDet.sku}</p>
           </div>

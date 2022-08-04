@@ -103,6 +103,10 @@ nav a {
   margin-top: 4vh;
 }
 
+.contact-status {
+  margin: 0%;
+}
+
 .contact-wrapper a {
   width: 2.3vw;
   margin-right: 2vw;
@@ -775,12 +779,15 @@ h2 {
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
   background-color: #fff;
+  /* background-image: url("https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/v996-009_1-kroir4dk.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=dcb55d36929676d81bb5f66b7e091fe8"); */
+  /* background-repeat: none; */
 }
 
 .image-array {
   width: 40vw;
   margin: 0 25vw;
   scroll-snap-align: center;
+  /* border: 1px solid black; */
 }
 
 .details-page-2 {
@@ -788,7 +795,22 @@ h2 {
   flex-direction: column;
   height: 50vh;
   width: 100vw;
+  /* background-image: url("https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/v996-009_1-kroir4dk.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=dcb55d36929676d81bb5f66b7e091fe8"); */
   background-color: #fff;
+}
+
+.details-page-2 a {
+  color: black;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid black;
+  padding: 1vh;
+  border-radius: 3rem;
+}
+
+.details-page-2 a:hover {
+  color: #9c1536;
+  border: 1px solid #9c1536;
 }
 
 .details-page-2 h2 {
@@ -850,7 +872,8 @@ li {
 .comments-section {
   height: 30vh;
   width: 100vw;
-  margin-top: 15vh;
+  /* margin-top: 15vh; */
+  /* background-image: url("https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/v996-009_1-kroir4dk.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=dcb55d36929676d81bb5f66b7e091fe8"); */
 }
 
 .comments-section input {
@@ -928,6 +951,7 @@ li {
 
 .single-comment {
   margin: 5vh 0;
+  /* background-image: url("https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/v996-009_1-kroir4dk.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=dcb55d36929676d81bb5f66b7e091fe8"); */
 }
 
 .comment-content {
@@ -983,7 +1007,7 @@ li {
   top: 18%;
   left: 19%;
   width: 60vw;
-  height: 45vw;
+  height: 75vh;
   background-color: #fff;
   box-shadow: -4px -3px 45px 21px rgba(0, 0, 0, 0.35);
   z-index: 1;
@@ -1129,7 +1153,7 @@ li {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 95vw;
   height: 100vh;
   overflow: hidden;
   z-index: -1;
@@ -1237,7 +1261,7 @@ li {
 }
 
 .arrow-notfound:hover {
-  filter: opacity(0.4) drop-shadow(0 0 0 blue);
+  color: #9c1536;
 }
 
 /* fade menu */
@@ -1246,8 +1270,8 @@ li {
 }
 
 .css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root a {
-  text-decoration: none;
-  color: black;
+  text-decoration: none !important;
+  color: black !important;
   font-weight: bold;
 }
 
@@ -1483,6 +1507,11 @@ li {
     width: 10vw;
   }
 
+  .loader {
+    left: 40%;
+    top: 40%;
+  }
+
   /* navbar */
   .search-wrapper {
     margin-right: 17vw;
@@ -1494,10 +1523,10 @@ li {
     margin-right: 4vw;
   }
   .logo {
-    height: 25vh;
-    width: 25vh;
-    top: -3%;
-    left: 23%;
+    height: 8vh;
+    width: 10vh;
+    top: 49%;
+    left: 39%;
   }
   .home-line-right {
     margin: 0%;
@@ -1557,6 +1586,10 @@ li {
     width: 40vw;
   }
 
+  .search-wall {
+    filter: blur(2.5px);
+  }
+
   /* details */
   .shoe-name p {
     font-size: 4vw;
@@ -1595,10 +1628,8 @@ li {
   .login-page input {
     width: 65vw;
   }
-  .eye {
-    width: 5vw;
-    left: 73%;
-    top: 48%;
+  .login-eye img {
+    height: 2.5vh;
   }
   .login-top img {
     height: 30vh;
@@ -1633,6 +1664,10 @@ li {
   }
   .css-1e6y48t-MuiButtonBase-root-MuiButton-root {
     width: 1vw !important;
+  }
+
+  .signup-eye img {
+    height: 2.2vh;
   }
 
   /* contact */

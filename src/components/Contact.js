@@ -112,7 +112,7 @@ const Contact = () => {
             required
           />
           <button>Submit</button>
-          <p>{status}</p>
+          <p className="contact-status">{status}</p>
         </form>
       </div>
       <div className="contact-footer">
